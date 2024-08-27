@@ -1,25 +1,29 @@
 package com.example.BOOK_MANAGEMENT_SYSTEM.model;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.sql.Timestamp;
 
 @Data
 @Entity
 @AllArgsConstructor
-public class Books {
+public class Wishlist {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String description;
-    private double price;
-    private int stock;
+    private Long wishlist_id;
 
-    public Books() {
-    }
+    private Long user_id;
+    @CreationTimestamp
+    private Timestamp wishlistAdded;
+    private Long product_id;
+
+
 }
-

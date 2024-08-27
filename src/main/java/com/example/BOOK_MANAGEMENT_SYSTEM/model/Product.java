@@ -13,17 +13,18 @@ import java.sql.Timestamp;
 @Data
 @Entity
 @AllArgsConstructor
-public class Users{
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
-    private String username;
-    private String password;
-    private String email;
+    private Long product_id;
+    private String name;
+    private String description;
+    private double price;
+    private int stock;
     @CreationTimestamp
-    private Timestamp Userdate;
+    private Timestamp addedDate;
 
-    public Users() {
+    public Product() {
     }
 }
 
