@@ -1,29 +1,29 @@
-package com.example.BOOK_MANAGEMENT_SYSTEM.model;
+package com.example.BOOK_MANAGEMENT_SYSTEM.model.adminModel;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
 @AllArgsConstructor
-public class Users{
+public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+
+    private Long admin_id;
     private String username;
     private String password;
     private String email;
-    @CreationTimestamp
-    private Timestamp Userdate;
+    @Column(name = "created_at")
+    private LocalDateTime created_at = LocalDateTime.now() ;
 
-    public Users() {
+
+    public Admin() {
     }
 }
-

@@ -1,12 +1,12 @@
-package com.example.BOOK_MANAGEMENT_SYSTEM.model;
+package com.example.BOOK_MANAGEMENT_SYSTEM.model.cartModel;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NonNull;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -15,17 +15,9 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cart_id;
-
-    @OneToOne
     private Long user_id;
-
-    private Long product_id;
-    private String cartItem;
-    private String password;
-
-    private int quantity;
-    @CreationTimestamp
-    private Timestamp addedCart;
+    @Column(name = "created_at")
+    private LocalDateTime created_at  = LocalDateTime.now();
 
 }
 
