@@ -1,14 +1,6 @@
 package com.example.BOOK_MANAGEMENT_SYSTEM.model.adminModel;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NonNull;
-import org.hibernate.annotations.CreationTimestamp;
-
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
+/*
 @Data
 @Entity
 @AllArgsConstructor
@@ -26,4 +18,39 @@ public class Admin {
 
     public Admin() {
     }
+}
+*/
+
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.cglib.core.Local;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Entity
+public class Admin {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long adminId;
+
+    @Column(unique = true)
+    @NotNull(message = "username is necessary")
+    private String adminUsername;
+
+    @NotNull(message = "email is necessary")
+    private String adminEmail;
+
+    @NotNull(message = "password is important")
+    private String adminPassword;
+
+    @NotNull
+    private Timestamp created_at;
+
 }
