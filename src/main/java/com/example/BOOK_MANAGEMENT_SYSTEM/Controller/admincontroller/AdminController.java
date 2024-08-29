@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/bookstore_user/admin")
+@RequestMapping("/bookstore/admin")
 public class AdminController {
 
     @Autowired
@@ -20,12 +20,6 @@ public class AdminController {
 
     @Autowired
     private ProductService productService;
-
-    @PostMapping("/register")
-    public ResponseEntity<String> registerAdmin(@RequestBody Admin admin) {
-        adminService.registerAdmin(admin);
-        return ResponseEntity.ok("Admin registered successfully");
-    }
 
     @PostMapping("/login")
     public ResponseEntity<String> loginAdmin(@RequestBody Admin admin) {
@@ -37,22 +31,32 @@ public class AdminController {
         }
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<String> registerAdmin(@RequestBody Admin admin) {
+        adminService.registerAdmin(admin);
+        return ResponseEntity.ok("Admin registered successfully");
+    }
+
+    @PutMapping("/update/book/{product_id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable long product_id,@RequestBody Product product) throws ProductNotFoundException {
+        if (productService.getAllProducts().stream().noneMatch(p -> p.getProduct_id() == product_id)) {
+            throw new ProductNotFoundException("Product with id " + product_id + " not found");
+        } else {
+            product.setProduct_id(product_id);
+            return new ResponseEntity<>(productService.updateProduct(product), HttpStatus.OK);
+        }
+    }
+
+
+
     @PostMapping("/add/book")
     public ResponseEntity<Product> addProduct(@Valid @RequestBody Product product) {
         return new ResponseEntity<>(productService.addProduct(product), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/book/{product_id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable long id,@RequestBody Product product) throws ProductNotFoundException {
-        if (productService.getAllProducts().stream().noneMatch(p -> p.getProduct_id() == id)) {
-            throw new ProductNotFoundException("Product with id " + id + " not found");
-        } else {
-            product.setProduct_id(id);
-            return new ResponseEntity<>(productService.updateProduct(product), HttpStatus.OK);
-        }
-    }
 
-    @DeleteMapping("/delete/book/{product_id}")
+
+    @DeleteMapping("/delete/book/{id}")
     public ResponseEntity<Object> deleteProduct(@PathVariable long id) throws ProductNotFoundException {
         if (productService.getAllProducts().stream().noneMatch(product -> product.getProduct_id() == id)) {
             throw new ProductNotFoundException("Product with id " + id + " not found");
