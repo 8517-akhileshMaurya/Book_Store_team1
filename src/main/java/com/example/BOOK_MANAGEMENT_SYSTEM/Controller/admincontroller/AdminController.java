@@ -56,7 +56,10 @@ public class AdminController {
         }
     }
 
-
+    @GetMapping("/all/books")
+    public List<Product> getAllBooks(){
+        return productService.getAllProducts();
+    }
 
     @PostMapping("/add/book")
     public ResponseEntity<Product> addProduct(@Valid @RequestBody Product product) {
