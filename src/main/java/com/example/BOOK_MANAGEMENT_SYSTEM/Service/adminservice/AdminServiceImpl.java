@@ -3,6 +3,7 @@ package com.example.BOOK_MANAGEMENT_SYSTEM.Service.adminservice;
 import com.example.BOOK_MANAGEMENT_SYSTEM.model.adminModel.Admin;
 import com.example.BOOK_MANAGEMENT_SYSTEM.repository.adminrepository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -14,6 +15,8 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminRepository adminRepository;
 
+    private BCryptPasswordEncoder encoder= new BCryptPasswordEncoder(10);
+
     @Override
     public List<Admin> getAllAdmin() {
         return adminRepository.findAll();
@@ -21,7 +24,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void registerAdmin(Admin admin) {
-        admin.setAdminPassword(admin.getAdminPassword());
+        admin.setAdminPassword(encoder.encode(admin.getAdminPassword()));
         admin.setCreated_at(new Timestamp(System.currentTimeMillis()));
         adminRepository.save(admin);
     }
