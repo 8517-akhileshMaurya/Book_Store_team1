@@ -1,3 +1,4 @@
+/*
 package com.example.BOOK_MANAGEMENT_SYSTEM.model.orderModel;
 
 import jakarta.persistence.*;
@@ -27,4 +28,4 @@ public class OrderItem {
 //order_id: Foreign Key (Order), not null
 //product_id: Foreign Key (Product), not null
 //quantity: Integer, not null
-//price: Decimal, not null
+//price: Decimal, not null*/

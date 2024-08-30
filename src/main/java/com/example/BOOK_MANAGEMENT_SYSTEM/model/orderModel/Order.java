@@ -1,8 +1,10 @@
+/*
 package com.example.BOOK_MANAGEMENT_SYSTEM.model.orderModel;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "orders")
 public class Order {
     @Id
@@ -29,3 +32,4 @@ public class Order {
 
 
 
+*/
